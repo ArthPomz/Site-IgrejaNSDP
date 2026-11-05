@@ -708,3 +708,19 @@ a, button { touch-action: manipulation; }
   }
   .js-revelar .revelar, .js-revelar .revelar .ornamento__linha { transform: none; transition: none; }
 }
+
+/* ---------- Cruzes iluminadas ---------- */
+
+:root { --luz-cruz: rgba(255, 205, 80, 1); }
+:root[data-tema="escuro"] { --luz-cruz: rgba(242, 196, 107, 0.95); }
+.fachada__cruzes {
+  filter: drop-shadow(0 0 3px var(--luz-cruz)) drop-shadow(0 0 9px var(--luz-cruz));
+  animation: brilho-cruz 4s ease-in-out 1.6s infinite;
+}
+:root[data-tema="escuro"] .fachada__cruzes { stroke: #ffe3a3; }
+@keyframes brilho-cruz {
+  50% { filter: drop-shadow(0 0 5px var(--luz-cruz)) drop-shadow(0 0 16px var(--luz-cruz)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fachada__cruzes { animation: none; }
+}
