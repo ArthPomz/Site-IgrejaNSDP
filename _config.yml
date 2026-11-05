@@ -1,0 +1,40 @@
+# Configuração do site da Comunidade Nossa Senhora da Penha (Timbuí)
+title: Comunidade Nossa Senhora da Penha
+description: Avisos, horários de missa e contato da Comunidade Nossa Senhora da Penha (CEB), em Timbuí, Fundão - ES.
+lang: pt-BR
+locale: pt_BR
+timezone: America/Sao_Paulo
+
+# Endereço do site no GitHub Pages.
+# Quando houver um domínio próprio (ex.: igrejatimbui.com.br):
+#   1. troque "url" pelo domínio, com https://
+#   2. deixe "baseurl" vazio: ""
+#   3. crie um arquivo CNAME na raiz com o domínio
+url: "https://arthpomz.github.io"
+baseurl: "/Site-IgrejaNSDP"
+
+permalink: /avisos/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+feed:
+  path: avisos/feed.xml
+
+exclude:
+  - README.md
+  - PRODUCT.md
+  - DESIGN.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .impeccable
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: aviso
+      categoria: Aviso

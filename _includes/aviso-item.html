@@ -1,0 +1,15 @@
+{%- assign meses = "jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez" | split: "," -%}
+{%- assign m = include.post.date | date: "%-m" | minus: 1 -%}
+<li class="aviso">
+  <a class="aviso__link" href="{{ include.post.url | relative_url }}">
+    <time class="aviso__data" datetime="{{ include.post.date | date_to_xmlschema }}">
+      <span class="aviso__dia">{{ include.post.date | date: "%-d" }}</span>
+      <span class="aviso__mes">{{ meses[m] }}</span>
+    </time>
+    <span class="aviso__texto">
+      <span class="aviso__categoria">{{ include.post.categoria | default: "Aviso" }}</span>
+      <span class="aviso__titulo">{{ include.post.title }}</span>
+      <span class="aviso__resumo">{{ include.post.excerpt | strip_html | strip_newlines | truncatewords: 22, "…" }}</span>
+    </span>
+  </a>
+</li>

@@ -1,0 +1,33 @@
+# Informações da igreja. Edite este arquivo para atualizar o site.
+# Deixe um campo vazio ("") se ainda não tiver a informação: o site esconde ou avisa automaticamente.
+
+nome: Comunidade Nossa Senhora da Penha
+sigla: CEB
+lugar: Timbuí · Fundão, ES
+paroquia: Paróquia São José de Fundão
+
+endereco:
+  rua: R. Nossa Sra. da Penha
+  bairro: Timbuí
+  cidade: Fundão - ES
+  cep: 29185-000
+  mapa: "https://www.google.com/maps/search/?api=1&query=Comunidade+Nossa+Senhora+da+Penha+Timbu%C3%AD+Fund%C3%A3o+ES"
+
+instagram: "https://www.instagram.com/_cnossasenhoradapenha/"
+instagram_usuario: "@_cnossasenhoradapenha"
+
+# Ainda não informados
+telefone: ""
+whatsapp: ""   # só números com DDD, ex.: 27999999999
+email: ""
+
+# Horários fixos das missas e celebrações.
+# Para adicionar, apague o [] e use um item por horário, assim:
+# missas:
+#   - dia: Domingo
+#     hora: "8h"
+#     tipo: Missa
+#   - dia: Quarta-feira
+#     hora: "19h30"
+#     tipo: Terço
+missas: []
