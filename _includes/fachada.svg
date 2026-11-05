@@ -1,0 +1,32 @@
+<svg class="fachada" viewBox="0 0 360 420" role="img" aria-labelledby="fachada-titulo">
+  <title id="fachada-titulo">Desenho da fachada da igreja, com duas torres</title>
+  <g class="fachada__cruzes">
+    <path d="M70 18v34M61 28h18M290 18v34M281 28h18M180 92v22M173 99h14"/>
+  </g>
+  <g class="fachada__corpo">
+    <path d="M38 112Q38 66 70 54Q102 66 102 112Z"/>
+    <path d="M258 112Q258 66 290 54Q322 66 322 112Z"/>
+    <path d="M110 404V184H120V164Q180 104 240 164V184H250V404Z"/>
+    <rect x="30" y="122" width="80" height="282"/>
+    <rect x="250" y="122" width="80" height="282"/>
+    <rect x="26" y="110" width="88" height="12"/>
+    <rect x="246" y="110" width="88" height="12"/>
+  </g>
+  <g class="fachada__moldura">
+    <path d="M36 128V398M104 128V398M256 128V398M324 128V398M126 186V398M234 186V398"/>
+    <path d="M30 262H330"/>
+    <path d="M30 116H114M246 116H334"/>
+    <path d="M126 180Q180 124 234 180"/>
+  </g>
+  <g class="fachada__janelas">
+    <path d="M57 196V158a13 13 0 0 1 26 0v38Z"/>
+    <path d="M277 196V158a13 13 0 0 1 26 0v38Z"/>
+    <circle cx="70" cy="228" r="9"/>
+    <circle cx="290" cy="228" r="9"/>
+    <path d="M57 346V302a13 13 0 0 1 26 0v44Z"/>
+    <path d="M277 346V302a13 13 0 0 1 26 0v44Z"/>
+    <circle cx="180" cy="226" r="20"/>
+    <path class="fachada__porta" d="M160 404V344a20 20 0 0 1 40 0v60Z"/>
+  </g>
+  <rect class="fachada__base" x="24" y="388" width="312" height="18"/>
+</svg>

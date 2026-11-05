@@ -1,0 +1,79 @@
+---
+layout: default
+title: Início
+classe_corpo: pagina-inicio
+---
+{%- assign igreja = site.data.igreja -%}
+<section class="capa" aria-labelledby="capa-titulo">
+  <div class="capa__texto">
+    <h1 id="capa-titulo">Comunidade Nossa Senhora da Penha</h1>
+    <p class="capa__lead">A capela azul de Timbuí, em Fundão. Aqui você encontra os horários das missas, os avisos da semana e como chegar até a igreja.</p>
+    <div class="capa__acoes">
+      <a class="botao botao--cheio" href="#missas">Horários de missa</a>
+      <a class="botao" href="{{ '/avisos/' | relative_url }}">Ver avisos</a>
+    </div>
+  </div>
+  <div class="capa__desenho">
+    {% include fachada.svg %}
+  </div>
+</section>
+
+<section class="secao" id="missas" aria-labelledby="missas-titulo">
+  <h2 id="missas-titulo">Missas e celebrações</h2>
+  {% if igreja.missas.size > 0 %}
+    <ul class="horarios">
+      {% for item in igreja.missas %}
+      <li class="horario">
+        <span class="horario__dia">{{ item.dia }}</span>
+        <span class="horario__hora">{{ item.hora }}</span>
+        <span class="horario__tipo">{{ item.tipo | default: "Missa" }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="nota">Os horários podem mudar em datas especiais. Confira sempre os avisos.</p>
+  {% else %}
+    <div class="vazio">
+      <p class="vazio__titulo">Os horários ainda vão ser publicados aqui.</p>
+      <p>Enquanto isso, confira as celebrações da semana no Instagram da {{ igreja.paroquia }}.</p>
+      <a class="botao" href="{{ igreja.instagram }}" rel="noopener">Abrir o Instagram</a>
+    </div>
+  {% endif %}
+</section>
+
+<section class="secao" id="avisos" aria-labelledby="avisos-titulo">
+  <div class="secao__cabeca">
+    <h2 id="avisos-titulo">Avisos recentes</h2>
+    {% if site.posts.size > 3 %}<a class="link-seta" href="{{ '/avisos/' | relative_url }}">Todos os avisos</a>{% endif %}
+  </div>
+  {% if site.posts.size > 0 %}
+    <ul class="avisos">
+      {% for post in site.posts limit: 3 %}{% include aviso-item.html post=post %}{% endfor %}
+    </ul>
+  {% else %}
+    <p class="vazio__titulo">Nenhum aviso publicado ainda.</p>
+  {% endif %}
+</section>
+
+<section class="secao contato" id="contato" aria-labelledby="contato-titulo">
+  <div class="contato__texto">
+    <h2 id="contato-titulo">Onde estamos</h2>
+    <address>
+      {{ igreja.endereco.rua }}<br>
+      {{ igreja.endereco.bairro }}, {{ igreja.endereco.cidade }}<br>
+      CEP {{ igreja.endereco.cep }}
+    </address>
+    <div class="contato__acoes">
+      <a class="botao botao--cheio" href="{{ igreja.endereco.mapa }}" rel="noopener">Como chegar</a>
+      {% if igreja.whatsapp != "" %}<a class="botao" href="https://wa.me/55{{ igreja.whatsapp }}" rel="noopener">WhatsApp</a>{% endif %}
+    </div>
+    <dl class="contato__lista">
+      {% if igreja.telefone != "" %}<div><dt>Telefone</dt><dd><a href="tel:+55{{ igreja.telefone | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}">{{ igreja.telefone }}</a></dd></div>{% endif %}
+      {% if igreja.email != "" %}<div><dt>E-mail</dt><dd><a href="mailto:{{ igreja.email }}">{{ igreja.email }}</a></dd></div>{% endif %}
+      <div><dt>Instagram</dt><dd><a href="{{ igreja.instagram }}" rel="noopener">{{ igreja.instagram_usuario }}</a></dd></div>
+      <div><dt>Paróquia</dt><dd>{{ igreja.paroquia }}</dd></div>
+    </dl>
+  </div>
+  <figure class="contato__foto">
+    <img src="{{ '/assets/img/fachada-dia.jpg' | relative_url }}" width="506" height="421" loading="lazy" alt="Fachada azul da igreja de Timbuí vista da praça, com duas torres e palmeiras ao lado.">
+  </figure>
+</section>

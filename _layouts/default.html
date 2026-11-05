@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#b7d2f2">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c1d3a">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preload" href="{{ '/assets/fonts/marcellus.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/atkinson-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/img/icone.svg' | relative_url }}" type="image/svg+xml">
+  {% feed_meta %}
+  {% seo %}
+</head>
+<body class="{{ page.classe_corpo }}">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <header class="topo">
+    <div class="topo__barra">
+      <a class="marca" href="{{ '/' | relative_url }}">
+        <span class="marca__nome">N. Sra. da Penha</span>
+        <span class="marca__lugar">{{ site.data.igreja.lugar }}</span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        {% assign url = page.url %}
+        <a href="{{ '/' | relative_url }}" {% if url == '/' %}aria-current="page"{% endif %}>Início</a>
+        <a href="{{ '/avisos/' | relative_url }}" {% if url contains '/avisos/' %}aria-current="page"{% endif %}>Avisos</a>
+        <a href="{{ '/#contato' | relative_url }}">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    {{ content }}
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape__faixa" aria-hidden="true"></div>
+    <div class="rodape__conteudo">
+      <p class="rodape__nome">{{ site.data.igreja.nome }} <span>({{ site.data.igreja.sigla }})</span></p>
+      <p>{{ site.data.igreja.endereco.rua }}, {{ site.data.igreja.endereco.bairro }}, {{ site.data.igreja.endereco.cidade }}, {{ site.data.igreja.endereco.cep }}</p>
+      <p>{{ site.data.igreja.paroquia }}</p>
+    </div>
+  </footer>
+</body>
+</html>

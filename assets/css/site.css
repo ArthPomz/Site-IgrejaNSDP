@@ -1,0 +1,564 @@
+/* Comunidade Nossa Senhora da Penha — Timbuí
+   Cores tiradas da fachada: azul-claro das paredes, branco das molduras,
+   azul-marinho das sombras e o âmbar das janelas acesas à noite. */
+
+@font-face {
+  font-family: "Marcellus";
+  src: url("../fonts/marcellus.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fonts/atkinson-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fonts/atkinson-400i.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("../fonts/atkinson-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --ceu: #b7d2f2;          /* parede da fachada */
+  --ceu-forte: #9fc1ec;
+  --moldura: #ffffff;
+  --azulejo: rgba(22, 56, 107, 0.09);
+  --tinta: #0f2747;        /* texto principal */
+  --tinta-suave: #3b5578;
+  --marinho: #16386b;      /* botões e links */
+  --marinho-forte: #0e2850;
+  --chao: #f6f9fd;         /* fundo das páginas */
+  --papel: #ffffff;
+  --linha: #d5e2f2;
+  --vela: #c46a12;         /* âmbar das janelas acesas */
+  --janela: #dbe8f8;
+  --porta: #16386b;
+  --foco: #c46a12;
+
+  --raio: 14px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --medida: 68ch;
+  --borda-lateral: max(1.25rem, env(safe-area-inset-left));
+  --largura: 72rem;
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ceu: #12305c;
+    --ceu-forte: #1a3d70;
+    --moldura: #d9e6f7;
+    --azulejo: rgba(217, 230, 247, 0.06);
+    --tinta: #e8f0fa;
+    --tinta-suave: #a9bdd8;
+    --marinho: #9cc3f2;
+    --marinho-forte: #c4dcf8;
+    --chao: #0c1d3a;
+    --papel: #11264a;
+    --linha: #24406b;
+    --vela: #f2b25c;
+    --janela: #f2b25c;
+    --porta: #f2b25c;
+    --foco: #f2b25c;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--chao);
+  color: var(--tinta);
+  font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--ceu-forte); color: var(--tinta); }
+
+h1, h2, h3 {
+  font-family: "Marcellus", Georgia, serif;
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 { font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem); }
+h2 { font-size: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a {
+  color: var(--marinho);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:focus-visible, button:focus-visible, main:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+main:focus { outline: none; }
+
+a, button { touch-action: manipulation; }
+
+.pular {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  background: var(--papel);
+  color: var(--tinta);
+  border-radius: 8px;
+}
+.pular:focus { top: 1rem; }
+
+/* ---------- Topo ---------- */
+
+.topo {
+  position: relative;
+  background: var(--ceu);
+  padding-top: env(safe-area-inset-top);
+}
+
+.topo__barra {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 1rem var(--borda-lateral);
+}
+
+.marca {
+  display: flex;
+  flex-direction: column;
+  color: var(--tinta);
+  text-decoration: none;
+  line-height: 1.15;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.marca__nome { font-family: "Marcellus", Georgia, serif; font-size: 1.25rem; }
+.marca__lugar { font-size: 0.875rem; color: var(--tinta-suave); }
+
+.menu { display: flex; gap: 0.25rem; }
+.menu a {
+  padding: 0.6rem 0.8rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: var(--tinta);
+  text-decoration: none;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: background-color 160ms ease;
+}
+.menu a[aria-current="page"] {
+  background: var(--moldura);
+  color: var(--marinho-forte);
+  font-weight: 700;
+}
+@media (prefers-color-scheme: dark) {
+  .menu a[aria-current="page"] { background: var(--ceu-forte); color: var(--tinta); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .menu a:not([aria-current]):hover { background: color-mix(in srgb, var(--moldura) 45%, transparent); }
+}
+
+/* Moldura branca que fecha o topo, como a faixa sobre a base da igreja */
+.topo::after,
+.pagina-inicio .capa::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 6px;
+  background: var(--moldura);
+  box-shadow: 0 -6px 0 var(--ceu-forte);
+}
+.pagina-inicio .topo::after { display: none; }
+
+/* ---------- Capa (página inicial) ---------- */
+
+.capa {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: end;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3.5rem) var(--borda-lateral) 0;
+  background: var(--ceu);
+  overflow: hidden;
+}
+.capa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--azulejo);
+  -webkit-mask: url("../img/azulejo.svg") 0 0 / 64px 64px repeat;
+  mask: url("../img/azulejo.svg") 0 0 / 64px 64px repeat;
+}
+.capa > * { max-width: calc(var(--largura) / 2); }
+.capa__texto { justify-self: end; width: 100%; padding-bottom: clamp(2.5rem, 6vw, 5rem); }
+.capa__desenho { justify-self: start; width: 100%; }
+
+.capa h1 { max-width: 12ch; color: var(--tinta); }
+.capa__lead {
+  margin-top: 1.25rem;
+  max-width: 34ch;
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3rem);
+  color: var(--tinta-suave);
+}
+@media (prefers-color-scheme: light) {
+  .capa__lead { color: #24406a; }
+}
+.capa__acoes { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+
+/* ---------- Fachada desenhada ---------- */
+
+.fachada {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin: 0 auto -6px;
+  overflow: visible;
+}
+.fachada__corpo { fill: var(--ceu-forte); }
+.fachada__corpo, .fachada__moldura, .fachada__cruzes, .fachada__janelas, .fachada__base {
+  stroke: var(--moldura);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.fachada__moldura { fill: none; stroke-width: 2.5; }
+.fachada__cruzes { fill: none; stroke: var(--porta); stroke-width: 3.5; }
+.fachada__janelas { fill: var(--janela); }
+.fachada__porta { fill: var(--porta); }
+.fachada__base { fill: var(--moldura); }
+
+@media (prefers-color-scheme: dark) {
+  .fachada__corpo { fill: #2a5694; }
+  .fachada__cruzes { stroke: var(--moldura); }
+  .fachada__base { fill: #8fa8c8; }
+  /* À noite, as janelas acendem uma a uma */
+  .fachada__janelas > * {
+    filter: drop-shadow(0 0 6px rgba(242, 178, 92, 0.55));
+    animation: acender 900ms var(--ease-out) both;
+  }
+  .fachada__janelas > :nth-child(2) { animation-delay: 80ms; }
+  .fachada__janelas > :nth-child(3) { animation-delay: 160ms; }
+  .fachada__janelas > :nth-child(4) { animation-delay: 220ms; }
+  .fachada__janelas > :nth-child(5) { animation-delay: 280ms; }
+  .fachada__janelas > :nth-child(6) { animation-delay: 340ms; }
+  .fachada__janelas > :nth-child(7) { animation-delay: 420ms; }
+  .fachada__janelas > :nth-child(8) { animation-delay: 520ms; }
+}
+@keyframes acender {
+  from { fill: #2b4f80; filter: drop-shadow(0 0 0 rgba(242, 178, 92, 0)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fachada__janelas > * { animation: none !important; }
+}
+
+/* ---------- Botões ---------- */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  border: 2px solid var(--marinho);
+  color: var(--marinho);
+  background: transparent;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 140ms var(--ease-out), background-color 160ms ease, color 160ms ease;
+}
+.botao:active { transform: scale(0.97); }
+.botao--cheio { background: var(--marinho); color: var(--papel); }
+@media (prefers-color-scheme: dark) {
+  .botao--cheio { color: var(--chao); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .botao:hover { background: color-mix(in srgb, var(--marinho) 10%, transparent); }
+  .botao--cheio:hover { background: var(--marinho-forte); }
+}
+
+/* ---------- Seções ---------- */
+
+.secao {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 5.5rem) var(--borda-lateral) 0;
+}
+.secao--colada { padding-top: 1.5rem; }
+.secao > h2, .secao__cabeca { margin-bottom: 1.5rem; }
+.secao__cabeca {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.link-seta, .link-voltar { font-weight: 700; text-decoration: none; }
+.link-seta::after { content: " →"; }
+.link-voltar::before { content: "← "; }
+@media (hover: hover) and (pointer: fine) {
+  .link-seta:hover, .link-voltar:hover { text-decoration: underline; }
+}
+
+.nota { margin-top: 1rem; color: var(--tinta-suave); font-size: 1rem; }
+
+/* Horários: uma tabela de parede, como o quadro da sacristia */
+.horarios {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid var(--tinta);
+}
+.horario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "dia hora" "tipo hora";
+  align-items: center;
+  column-gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--linha);
+}
+.horario__dia { grid-area: dia; font-weight: 700; }
+.horario__tipo { grid-area: tipo; color: var(--tinta-suave); font-size: 1rem; }
+.horario__hora {
+  grid-area: hora;
+  font-family: "Marcellus", Georgia, serif;
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 48rem) {
+  .horarios { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; }
+}
+
+.vazio {
+  max-width: 40rem;
+  padding: 1.75rem;
+  border-radius: var(--raio);
+  background: var(--papel);
+  border: 1px solid var(--linha);
+}
+.vazio__titulo { font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem; }
+.vazio p:last-of-type { margin-bottom: 1.25rem; }
+
+/* ---------- Avisos ---------- */
+
+.avisos { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--tinta); }
+.aviso { border-bottom: 1px solid var(--linha); }
+.aviso__link {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.25rem 0.5rem 1.25rem 0;
+  color: inherit;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background-color 160ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .aviso__link:hover { background: var(--papel); }
+  .aviso__link:hover .aviso__titulo { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+}
+.aviso__link:active { background: var(--papel); }
+
+.aviso__data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  aspect-ratio: 1;
+  border-radius: 999px 999px 10px 10px; /* janela em arco */
+  background: var(--ceu);
+  color: var(--tinta);
+  line-height: 1;
+  padding-top: 0.4rem;
+}
+.aviso__dia { font-family: "Marcellus", Georgia, serif; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.aviso__mes { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.2rem; }
+
+.aviso__texto { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.aviso__categoria {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--vela);
+}
+@media (prefers-color-scheme: light) {
+  .aviso__categoria { color: #9a4f08; }
+}
+.aviso__titulo {
+  font-family: "Marcellus", Georgia, serif;
+  font-size: clamp(1.3rem, 1.15rem + 0.5vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--tinta);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.aviso__resumo {
+  color: var(--tinta-suave);
+  font-size: 1rem;
+  max-width: var(--medida);
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.ano { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
+.ano:first-child { margin-top: 0; }
+
+/* ---------- Contato ---------- */
+
+.contato {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.contato address { font-style: normal; font-size: 1.25rem; margin: 1.25rem 0 1.5rem; }
+.contato__acoes { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; }
+.contato__lista { margin: 0; display: grid; gap: 1rem; }
+.contato__lista div { display: grid; grid-template-columns: 7rem minmax(0, 1fr); gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--linha); }
+.contato__lista dt { color: var(--tinta-suave); font-size: 1rem; }
+.contato__lista dd { margin: 0; overflow-wrap: anywhere; }
+
+.contato__foto { margin: 0; justify-self: center; width: 100%; max-width: 26rem; }
+.contato__foto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 999px 999px var(--raio) var(--raio); /* recorte em arco, como as janelas */
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 40%;
+  box-shadow: 0 18px 40px -20px rgba(15, 39, 71, 0.45);
+}
+
+/* ---------- Páginas internas ---------- */
+
+.cabeca-pagina {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) var(--borda-lateral) 1rem;
+}
+.cabeca-pagina p { color: var(--tinta-suave); max-width: 50ch; margin-top: 1rem; }
+
+.artigo { max-width: calc(var(--medida) + 2 * 1.25rem); margin: 0 auto; }
+.artigo .cabeca-pagina { padding-left: var(--borda-lateral); padding-right: var(--borda-lateral); }
+.artigo h1 { font-size: clamp(2rem, 1.5rem + 2.4vw, 3.25rem); overflow-wrap: anywhere; }
+.artigo__meta { margin: 1.5rem 0 0.75rem !important; font-size: 1rem; }
+.artigo__detalhes {
+  margin: 0 var(--borda-lateral) 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--ceu);
+  border-radius: var(--raio);
+  display: grid;
+  gap: 0.5rem;
+}
+.artigo__detalhes div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 1rem; }
+.artigo__detalhes dt { font-weight: 700; }
+.artigo__detalhes dd { margin: 0; }
+.artigo__corpo { padding: 0.5rem var(--borda-lateral) 0; overflow-wrap: break-word; }
+.artigo__corpo img { max-width: 100%; height: auto; border-radius: var(--raio); }
+.artigo__corpo h2 { font-size: 1.6rem; margin: 2.25rem 0 0.75rem; }
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  margin-top: clamp(4rem, 9vw, 7rem);
+  background: var(--ceu);
+  color: var(--tinta);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.rodape__faixa {
+  height: 28px;
+  background: var(--azulejo);
+  -webkit-mask: url("../img/azulejo.svg") 0 0 / 28px 28px repeat-x;
+  mask: url("../img/azulejo.svg") 0 0 / 28px 28px repeat-x;
+  border-top: 6px solid var(--moldura);
+  background-color: color-mix(in srgb, var(--tinta) 22%, transparent);
+}
+.rodape__conteudo {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 2rem var(--borda-lateral) 2.5rem;
+  font-size: 1rem;
+  color: var(--tinta-suave);
+}
+.rodape__conteudo p { margin: 0 0 0.35rem; }
+.rodape__nome { font-family: "Marcellus", Georgia, serif; font-size: 1.35rem; color: var(--tinta); }
+.rodape__nome span { font-family: "Atkinson Hyperlegible", system-ui, sans-serif; font-size: 1rem; color: var(--tinta-suave); }
+
+/* ---------- Celular ---------- */
+
+@media (max-width: 52rem) {
+  .capa {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-top: 0.5rem;
+  }
+  .capa__texto { justify-self: stretch; padding-bottom: 1.5rem; }
+  .capa__desenho { justify-self: center; max-width: 300px; }
+  .contato { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 30rem) {
+  body { font-size: 1.0625rem; }
+  .topo__barra { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 0.5rem; }
+  .menu { margin-left: -0.8rem; }
+  .capa__acoes .botao, .contato__acoes .botao { flex: 1 1 auto; }
+  .aviso__link { grid-template-columns: 3.75rem minmax(0, 1fr); gap: 1rem; }
+  .aviso__dia { font-size: 1.35rem; }
+  .contato__lista div { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+}
