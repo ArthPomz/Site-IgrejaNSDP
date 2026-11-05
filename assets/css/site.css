@@ -473,7 +473,7 @@ a, button { touch-action: manipulation; }
 .contato__lista dt { color: var(--tinta-suave); font-size: 1rem; }
 .contato__lista dd { margin: 0; overflow-wrap: anywhere; }
 
-.contato__foto { margin: 0; justify-self: center; width: 100%; max-width: 26rem; }
+.contato__foto { margin: 0; justify-self: center; width: 100%; max-width: 22rem; }
 .contato__foto img {
   display: block;
   width: 100%;
