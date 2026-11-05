@@ -26,7 +26,7 @@ Site simples da Comunidade Nossa Senhora da Penha (CEB) de Timbuí: uma página 
 
 ## Capabilities and Constraints
 
-- Sem painel administrativo; avisos são arquivos Markdown em `_posts/`.
+- Sem painel administrativo; avisos são arquivos Markdown em `_avisos/`, todos exibidos na página inicial.
 - Horários de missa, telefone e WhatsApp ainda **não foram informados**; não inventar. Usar marcações visíveis de "a confirmar".
 - Endereço confirmado: R. Nossa Sra. da Penha, Timbuí, Fundão - ES, 29185-000.
 - Instagram da comunidade (confirmado pelo Arthur): https://www.instagram.com/_cnossasenhoradapenha/

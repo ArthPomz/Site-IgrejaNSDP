@@ -13,14 +13,14 @@ timezone: America/Sao_Paulo
 url: "https://arthpomz.github.io"
 baseurl: "/Site-IgrejaNSDP"
 
-permalink: /avisos/:year/:month/:day/:title/
 
 plugins:
-  - jekyll-feed
   - jekyll-seo-tag
 
-feed:
-  path: avisos/feed.xml
+# Os avisos aparecem todos na página inicial; não geram páginas separadas.
+collections:
+  avisos:
+    output: false
 
 exclude:
   - README.md
@@ -31,10 +31,3 @@ exclude:
   - vendor
   - .impeccable
 
-defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: aviso
-      categoria: Aviso

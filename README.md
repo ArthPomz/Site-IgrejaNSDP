@@ -6,9 +6,9 @@ O site mostra os horários de missa, os avisos da comunidade (missas, eventos, r
 
 ## Como publicar um aviso
 
-Cada aviso é um arquivo de texto na pasta [`_posts`](_posts). Para criar um novo pelo próprio site do GitHub:
+Cada aviso é um arquivo de texto na pasta [`_avisos`](_avisos). Para criar um novo pelo próprio site do GitHub:
 
-1. Abra a pasta `_posts` e clique em **Add file → Create new file**.
+1. Abra a pasta `_avisos` e clique em **Add file → Create new file**.
 2. Dê ao arquivo um nome com a data e um título curto, sem acentos nem espaços:
    `2026-12-24-missa-de-natal.md`
 3. Cole o modelo abaixo e troque o texto:
@@ -24,11 +24,11 @@ Cada aviso é um arquivo de texto na pasta [`_posts`](_posts). Para criar um nov
    Escreva aqui o aviso, com quantos parágrafos quiser.
    ```
 
-4. Clique em **Commit changes**. Em um ou dois minutos o aviso aparece no site.
+4. Clique em **Commit changes**. Em um ou dois minutos o aviso aparece na página inicial do site, com o texto completo. Os mais recentes aparecem primeiro.
 
 - `categoria` pode ser, por exemplo, `Aviso`, `Missa` ou `Evento`. Se ficar vazia, aparece "Aviso".
 - `quando` e `local` são opcionais. Se não fizerem sentido para o aviso, apague essas duas linhas.
-- Para corrigir ou apagar um aviso, abra o arquivo dele em `_posts` e use o lápis (editar) ou a lixeira.
+- Para corrigir ou apagar um aviso, abra o arquivo dele em `_avisos` e use o lápis (editar) ou a lixeira.
 
 ## Como mudar horários de missa, telefone e endereço
 
@@ -64,8 +64,7 @@ E abra `http://localhost:4000/Site-IgrejaNSDP/`.
 | Caminho | O que é |
 | --- | --- |
 | `index.html` | Página inicial: capa, avisos (com o texto completo), missas e contato |
-| `avisos/index.html` | Lista de todos os avisos |
-| `_posts/` | Os avisos, um arquivo por aviso |
+| `_avisos/` | Os avisos, um arquivo por aviso |
 | `_data/igreja.yml` | Endereço, contatos e horários de missa |
 | `_layouts/`, `_includes/` | Moldes das páginas e o desenho da fachada |
 | `assets/` | Estilos, fontes e imagens |
