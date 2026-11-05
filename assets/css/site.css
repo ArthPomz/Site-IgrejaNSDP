@@ -493,12 +493,12 @@ a, button { touch-action: manipulation; }
 
 /* ---------- Avisos completos na página inicial ---------- */
 
-.avisos-completos { display: grid; border-top: 2px solid var(--tinta); }
+.avisos-completos { display: grid; }
 .aviso-completo {
   display: grid;
   grid-template-columns: 4.5rem minmax(0, 1fr);
   gap: 1.25rem;
-  padding: 1.75rem 0;
+  padding: 1.25rem 0 1.75rem;
   border-bottom: 1px solid var(--linha);
   scroll-margin-top: 1rem;
 }
@@ -531,3 +531,192 @@ a, button { touch-action: manipulation; }
 
 /* Os avisos vêm logo depois da capa, com menos espaço acima */
 #avisos { padding-top: clamp(2rem, 4vw, 3rem); }
+
+/* =========================================================
+   Elementos de igreja e animações
+   ========================================================= */
+
+:root {
+  --sino: #c9902a;
+  --vao: #16386b;
+  --nuvem: rgba(255, 255, 255, 0.55);
+  --estrela: #fff6dc;
+  --aureola: rgba(255, 255, 255, 0.85);
+}
+:root[data-tema="escuro"] {
+  --sino: #f2c46b;
+  --vao: #0a1830;
+  --nuvem: rgba(217, 230, 247, 0.06);
+  --aureola: rgba(242, 178, 92, 0.55);
+}
+
+/* ---------- Céu da capa ---------- */
+
+.ceu { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.ceu__nuvem { position: absolute; fill: var(--nuvem); width: 220px; animation: nuvem 70s linear infinite; }
+.ceu__nuvem--1 { top: 8%; left: -240px; animation-delay: -12s; }
+.ceu__nuvem--2 { top: 34%; left: -240px; width: 150px; animation-duration: 95s; animation-delay: -60s; opacity: 0.8; }
+.ceu__nuvem--3 { top: 60%; left: -240px; width: 180px; animation-duration: 85s; animation-delay: -35s; opacity: 0.6; }
+@keyframes nuvem { to { transform: translateX(calc(100vw + 480px)); } }
+
+.ceu__estrela {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--estrela);
+  box-shadow: 0 0 6px 1px rgba(255, 246, 220, 0.6);
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+:root[data-tema="escuro"] .ceu__estrela { opacity: 0.8; animation: cintilar 3.2s ease-in-out var(--d) infinite; }
+@keyframes cintilar { 50% { opacity: 0.15; transform: scale(0.6); } }
+
+/* ---------- Fachada: auréola, sinos, desenho ---------- */
+
+.fachada__aureola-centro { stop-color: var(--aureola); }
+.fachada__aureola-borda { stop-color: var(--aureola); stop-opacity: 0; }
+.fachada__aureola { animation: respirar 5s ease-in-out infinite; transform-origin: 180px 226px; }
+@keyframes respirar { 50% { opacity: 0.55; transform: scale(0.9); } }
+
+.fachada__vaos { fill: var(--vao); stroke: var(--moldura); stroke-width: 3; }
+.fachada__sino { fill: var(--sino); stroke: var(--sino); stroke-width: 1.5; stroke-linejoin: round; }
+.fachada__sino--esq { transform-origin: 70px 152px; animation: badalar 3.6s ease-in-out infinite; }
+.fachada__sino--dir { transform-origin: 290px 152px; animation: badalar 3.6s ease-in-out -1.8s infinite; }
+@keyframes badalar {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(14deg); }
+  45% { transform: rotate(-12deg); }
+  65% { transform: rotate(6deg); }
+  80% { transform: rotate(-3deg); }
+}
+
+.fachada__senhora { fill: var(--porta); }
+:root[data-tema="escuro"] .fachada__senhora { fill: #2a5694; }
+
+/* A fachada se desenha ao abrir a página */
+.fachada__moldura path,
+.fachada__cruzes path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: desenhar 1.6s var(--ease-out) both;
+}
+.fachada__cruzes path { animation-delay: 700ms; }
+@keyframes desenhar { from { stroke-dashoffset: 1; } }
+.fachada__corpo { animation: surgir 900ms var(--ease-out) both; }
+.fachada__vaos, .fachada__sino, .fachada__janelas, .fachada__senhora, .fachada__base { animation-fill-mode: both; }
+@keyframes surgir { from { opacity: 0.25; } }
+
+/* Ajuste das janelas acesas (agora são 6) */
+:root[data-tema="escuro"] .fachada__janelas > :nth-child(5) { animation-delay: 300ms; }
+:root[data-tema="escuro"] .fachada__janelas > :nth-child(6) { animation-delay: 420ms; }
+
+/* ---------- Ornamento com cruz sob os títulos ---------- */
+
+.ornamento {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 14rem;
+  margin: -0.75rem 0 1.75rem;
+  color: var(--vela);
+}
+.ornamento__linha { flex: 1; height: 1px; background: currentColor; opacity: 0.55; transform-origin: right; }
+.ornamento__linha:last-child { transform-origin: left; }
+.ornamento svg { width: 22px; height: 22px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.contato .ornamento { margin-top: 0.5rem; }
+:root:not([data-tema="escuro"]) .ornamento { color: #9a4f08; }
+
+/* ---------- Vela acesa ---------- */
+
+.vazio { display: flex; gap: 1.5rem; align-items: center; }
+.vazio__texto { min-width: 0; }
+.vela { width: 54px; flex-shrink: 0; overflow: visible; }
+.vela__corpo { fill: var(--papel); stroke: var(--linha); stroke-width: 2; }
+:root:not([data-tema="escuro"]) .vela__corpo { fill: #fffdf7; stroke: #e5d8c3; }
+.vela__cera { fill: none; stroke: #e5d8c3; stroke-width: 2; stroke-linecap: round; }
+.vela__pavio { stroke: var(--tinta); stroke-width: 2; stroke-linecap: round; }
+.vela__prato { fill: var(--sino); }
+.vela__chama { fill: #f2a53a; transform-origin: 30px 38px; animation: chama 1.6s ease-in-out infinite alternate; }
+.vela__halo { fill: rgba(242, 165, 58, 0.18); transform-origin: 30px 30px; animation: halo 1.6s ease-in-out infinite alternate; }
+@keyframes chama {
+  0% { transform: scale(1, 1) rotate(-2deg); }
+  50% { transform: scale(0.92, 1.08) rotate(2deg); }
+  100% { transform: scale(1.04, 0.95) rotate(-1deg); }
+}
+@keyframes halo { to { transform: scale(1.12); opacity: 0.7; } }
+
+/* ---------- Faixa do versículo ---------- */
+
+.versiculo {
+  position: relative;
+  isolation: isolate;
+  margin-top: clamp(3.5rem, 8vw, 6rem);
+  background: var(--ceu);
+  overflow: hidden;
+  border-block: 6px solid var(--moldura);
+}
+.versiculo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--azulejo);
+  -webkit-mask: url("../img/azulejo.svg") 0 0 / 64px 64px repeat;
+  mask: url("../img/azulejo.svg") 0 0 / 64px 64px repeat;
+}
+.versiculo__dentro {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--borda-lateral);
+  text-align: center;
+}
+.versiculo blockquote { margin: 0; }
+.versiculo p {
+  font-family: "Marcellus", Georgia, serif;
+  font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.4rem);
+  line-height: 1.3;
+  color: var(--tinta);
+  text-wrap: balance;
+  margin: 0;
+}
+.versiculo footer { margin-top: 1rem; color: var(--tinta-suave); font-weight: 700; font-size: 1rem; }
+.versiculo__pomba {
+  width: 56px;
+  margin: 0 auto 1rem;
+  display: block;
+  fill: var(--moldura);
+  animation: voar 6s ease-in-out infinite;
+}
+.versiculo__pomba circle { fill: var(--tinta); }
+@keyframes voar { 50% { transform: translateY(-8px) rotate(-3deg); } }
+
+/* ---------- Entrada suave das seções ao rolar ---------- */
+/* O conteúdo nunca fica invisível: só sobe alguns pixels. */
+
+.js-revelar .revelar { transform: translateY(28px); transition: transform 900ms var(--ease-out); }
+.js-revelar .revelar.visivel { transform: none; }
+.js-revelar .revelar .ornamento__linha { transform: scaleX(0); transition: transform 900ms var(--ease-out) 200ms; }
+.js-revelar .revelar.visivel .ornamento__linha { transform: scaleX(1); }
+
+@media (hover: hover) and (pointer: fine) {
+  .aviso-completo .aviso__data { transition: transform 220ms var(--ease-out), background-color 220ms ease; }
+  .aviso-completo:hover .aviso__data { transform: translateY(-3px); background: var(--ceu-forte); }
+}
+
+@media (max-width: 30rem) {
+  .vazio { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .vela { width: 44px; }
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .ceu__nuvem, .ceu__estrela, .fachada__aureola, .fachada__sino, .fachada__moldura path,
+  .fachada__cruzes path, .fachada__corpo, .vela__chama, .vela__halo, .versiculo__pomba {
+    animation: none !important;
+  }
+  .js-revelar .revelar, .js-revelar .revelar .ornamento__linha { transform: none; transition: none; }
+}

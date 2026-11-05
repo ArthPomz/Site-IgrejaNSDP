@@ -74,6 +74,24 @@
         aplicar(novo);
         try { localStorage.setItem("tema", novo); } catch (e) {}
       });
+
+      // Seções sobem suavemente ao aparecer na tela (o conteúdo já está visível)
+      var calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!calmo && "IntersectionObserver" in window) {
+        var itens = document.querySelectorAll(".secao, .versiculo__dentro, .aviso-completo");
+        var obs = new IntersectionObserver(function (entradas) {
+          entradas.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("visivel"); obs.unobserve(e.target); }
+          });
+        }, { rootMargin: "0px 0px -8% 0px" });
+        itens.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight) return; // o que já está na tela fica parado
+          el.classList.add("revelar");
+          obs.observe(el);
+        });
+        raiz.classList.add("js-revelar");
+      }
     })();
   </script>
 </body>
