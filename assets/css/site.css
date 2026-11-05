@@ -537,15 +537,13 @@ a, button { touch-action: manipulation; }
    ========================================================= */
 
 :root {
-  --sino: #c9902a;
-  --vao: #16386b;
+  --dourado: #c9902a;
   --nuvem: rgba(255, 255, 255, 0.82);
   --estrela: #fff6dc;
   --aureola: rgba(255, 255, 255, 0.85);
 }
 :root[data-tema="escuro"] {
-  --sino: #f2c46b;
-  --vao: #0a1830;
+  --dourado: #f2c46b;
   --nuvem: rgba(217, 230, 247, 0.09);
   --aureola: rgba(242, 178, 92, 0.55);
 }
@@ -578,24 +576,13 @@ a, button { touch-action: manipulation; }
 :root[data-tema="escuro"] .ceu__estrela { opacity: 0.8; animation: cintilar 3.2s ease-in-out var(--d) infinite; }
 @keyframes cintilar { 50% { opacity: 0.15; transform: scale(0.6); } }
 
-/* ---------- Fachada: auréola, sinos, desenho ---------- */
+/* ---------- Fachada: auréola e desenho ---------- */
 
 .fachada__aureola-centro { stop-color: var(--aureola); }
 .fachada__aureola-borda { stop-color: var(--aureola); stop-opacity: 0; }
 .fachada__aureola { animation: respirar 5s ease-in-out infinite; transform-origin: 180px 226px; }
 @keyframes respirar { 50% { opacity: 0.55; transform: scale(0.9); } }
 
-.fachada__vaos { fill: var(--vao); stroke: var(--moldura); stroke-width: 3; }
-.fachada__sino { fill: var(--sino); stroke: var(--sino); stroke-width: 1.5; stroke-linejoin: round; }
-.fachada__sino--esq { transform-origin: 70px 152px; animation: badalar 3.6s ease-in-out infinite; }
-.fachada__sino--dir { transform-origin: 290px 152px; animation: badalar 3.6s ease-in-out -1.8s infinite; }
-@keyframes badalar {
-  0%, 100% { transform: rotate(0deg); }
-  20% { transform: rotate(14deg); }
-  45% { transform: rotate(-12deg); }
-  65% { transform: rotate(6deg); }
-  80% { transform: rotate(-3deg); }
-}
 
 .fachada__senhora { fill: var(--porta); }
 :root[data-tema="escuro"] .fachada__senhora { fill: #2a5694; }
@@ -610,12 +597,9 @@ a, button { touch-action: manipulation; }
 .fachada__cruzes path { animation-delay: 700ms; }
 @keyframes desenhar { from { stroke-dashoffset: 1; } }
 .fachada__corpo { animation: surgir 900ms var(--ease-out) both; }
-.fachada__vaos, .fachada__sino, .fachada__janelas, .fachada__senhora, .fachada__base { animation-fill-mode: both; }
+.fachada__janelas, .fachada__senhora, .fachada__base { animation-fill-mode: both; }
 @keyframes surgir { from { opacity: 0.25; } }
 
-/* Ajuste das janelas acesas (agora são 6) */
-:root[data-tema="escuro"] .fachada__janelas > :nth-child(5) { animation-delay: 300ms; }
-:root[data-tema="escuro"] .fachada__janelas > :nth-child(6) { animation-delay: 420ms; }
 
 /* ---------- Ornamento com cruz sob os títulos ---------- */
 
@@ -642,7 +626,7 @@ a, button { touch-action: manipulation; }
 :root:not([data-tema="escuro"]) .vela__corpo { fill: #fffdf7; stroke: #e5d8c3; }
 .vela__cera { fill: none; stroke: #e5d8c3; stroke-width: 2; stroke-linecap: round; }
 .vela__pavio { stroke: var(--tinta); stroke-width: 2; stroke-linecap: round; }
-.vela__prato { fill: var(--sino); }
+.vela__prato { fill: var(--dourado); }
 .vela__chama { fill: #f2a53a; transform-origin: 30px 38px; animation: chama 1.6s ease-in-out infinite alternate; }
 .vela__halo { fill: rgba(242, 165, 58, 0.18); transform-origin: 30px 30px; animation: halo 1.6s ease-in-out infinite alternate; }
 @keyframes chama {
@@ -718,7 +702,7 @@ a, button { touch-action: manipulation; }
 /* ---------- Movimento reduzido ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .ceu__nuvem, .ceu__estrela, .fachada__aureola, .fachada__sino, .fachada__moldura path,
+  .ceu__nuvem, .ceu__estrela, .fachada__aureola, .fachada__moldura path,
   .fachada__cruzes path, .fachada__corpo, .vela__chama, .vela__halo, .versiculo__pomba {
     animation: none !important;
   }

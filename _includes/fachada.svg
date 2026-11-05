@@ -1,5 +1,5 @@
 <svg class="fachada" viewBox="0 0 360 420" role="img" aria-labelledby="fachada-titulo">
-  <title id="fachada-titulo">Desenho da fachada da igreja, com duas torres, sinos e a imagem de Nossa Senhora no óculo</title>
+  <title id="fachada-titulo">Desenho da fachada da igreja, com duas torres e a imagem de Nossa Senhora no óculo</title>
   <defs>
     <radialGradient id="fachada-aureola" cx="50%" cy="50%" r="50%">
       <stop offset="0" class="fachada__aureola-centro"/>
@@ -25,20 +25,9 @@
     <path pathLength="1" d="M30 116H114M246 116H334"/>
     <path pathLength="1" d="M126 180Q180 124 234 180"/>
   </g>
-  <!-- Aberturas dos sinos no alto das torres -->
-  <g class="fachada__vaos">
-    <path d="M55 200V158a15 15 0 0 1 30 0v42Z"/>
-    <path d="M275 200V158a15 15 0 0 1 30 0v42Z"/>
-  </g>
-  <g class="fachada__sino fachada__sino--esq">
-    <path d="M70 152v5M62 178q0-16 8-19q8 3 8 19l3 4h-22z"/>
-    <circle cx="70" cy="186" r="2.6"/>
-  </g>
-  <g class="fachada__sino fachada__sino--dir">
-    <path d="M290 152v5M282 178q0-16 8-19q8 3 8 19l3 4h-22z"/>
-    <circle cx="290" cy="186" r="2.6"/>
-  </g>
   <g class="fachada__janelas">
+    <path d="M57 196V158a13 13 0 0 1 26 0v38Z"/>
+    <path d="M277 196V158a13 13 0 0 1 26 0v38Z"/>
     <circle cx="70" cy="228" r="9"/>
     <circle cx="290" cy="228" r="9"/>
     <path d="M57 346V302a13 13 0 0 1 26 0v44Z"/>
