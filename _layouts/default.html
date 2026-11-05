@@ -3,14 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#b7d2f2">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c1d3a">
+  <meta name="theme-color" content="#b7d2f2">
   <meta name="color-scheme" content="light dark">
+  <script>
+    (function () {
+      var tema;
+      try { tema = localStorage.getItem("tema"); } catch (e) {}
+      if (tema !== "claro" && tema !== "escuro") {
+        tema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro";
+      }
+      document.documentElement.setAttribute("data-tema", tema);
+    })();
+  </script>
   <link rel="preload" href="{{ '/assets/fonts/marcellus.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/atkinson-400.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
   <link rel="icon" href="{{ '/assets/img/icone.svg' | relative_url }}" type="image/svg+xml">
-  {% feed_meta %}
   {% seo %}
 </head>
 <body class="{{ page.classe_corpo }}">
@@ -21,12 +29,18 @@
         <span class="marca__nome">N. Sra. da Penha</span>
         <span class="marca__lugar">{{ site.data.igreja.lugar }}</span>
       </a>
-      <nav class="menu" aria-label="Principal">
-        {% assign url = page.url %}
-        <a href="{{ '/' | relative_url }}" {% if url == '/' %}aria-current="page"{% endif %}>Início</a>
-        <a href="{{ '/#avisos' | relative_url }}">Avisos</a>
-        <a href="{{ '/#contato' | relative_url }}">Contato</a>
-      </nav>
+      <div class="topo__acoes">
+        <nav class="menu" aria-label="Principal">
+          {% assign url = page.url %}
+          <a href="{{ '/' | relative_url }}" {% if url == '/' %}aria-current="page"{% endif %}>Início</a>
+          <a href="{{ '/#avisos' | relative_url }}">Avisos</a>
+          <a href="{{ '/#contato' | relative_url }}">Contato</a>
+        </nav>
+        <button class="tema" type="button" aria-label="Ativar tema escuro">
+          <svg class="tema__lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+          <svg class="tema__sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -42,5 +56,43 @@
       <p>{{ site.data.igreja.paroquia }}</p>
     </div>
   </footer>
+  <script>
+    (function () {
+      var raiz = document.documentElement;
+      var botao = document.querySelector(".tema");
+      var cor = document.querySelector('meta[name="theme-color"]');
+      function aplicar(tema) {
+        raiz.setAttribute("data-tema", tema);
+        var escuro = tema === "escuro";
+        botao.setAttribute("aria-label", escuro ? "Ativar tema claro" : "Ativar tema escuro");
+        botao.title = escuro ? "Tema claro" : "Tema escuro";
+        if (cor) cor.setAttribute("content", escuro ? "#12305c" : "#b7d2f2");
+      }
+      aplicar(raiz.getAttribute("data-tema") || "claro");
+      botao.addEventListener("click", function () {
+        var novo = raiz.getAttribute("data-tema") === "escuro" ? "claro" : "escuro";
+        aplicar(novo);
+        try { localStorage.setItem("tema", novo); } catch (e) {}
+      });
+
+      // Seções sobem suavemente ao aparecer na tela (o conteúdo já está visível)
+      var calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!calmo && "IntersectionObserver" in window) {
+        var itens = document.querySelectorAll(".secao, .versiculo__dentro, .aviso-completo");
+        var obs = new IntersectionObserver(function (entradas) {
+          entradas.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("visivel"); obs.unobserve(e.target); }
+          });
+        }, { rootMargin: "0px 0px -8% 0px" });
+        itens.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight) return; // o que já está na tela fica parado
+          el.classList.add("revelar");
+          obs.observe(el);
+        });
+        raiz.classList.add("js-revelar");
+      }
+    })();
+  </script>
 </body>
 </html>
