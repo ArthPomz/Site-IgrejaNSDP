@@ -329,22 +329,8 @@ a, button { touch-action: manipulation; }
   margin: 0 auto;
   padding: clamp(3rem, 7vw, 5.5rem) var(--borda-lateral) 0;
 }
-.secao--colada { padding-top: 1.5rem; }
-.secao > h2, .secao__cabeca { margin-bottom: 1.5rem; }
-.secao__cabeca {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-}
+.secao > h2 { margin-bottom: 1.5rem; }
 
-.link-seta, .link-voltar { font-weight: 700; text-decoration: none; }
-.link-seta::after { content: " →"; }
-.link-voltar::before { content: "← "; }
-@media (hover: hover) and (pointer: fine) {
-  .link-seta:hover, .link-voltar:hover { text-decoration: underline; }
-}
 
 .nota { margin-top: 1rem; color: var(--tinta-suave); font-size: 1rem; }
 
@@ -386,25 +372,7 @@ a, button { touch-action: manipulation; }
 .vazio__titulo { font-weight: 700; font-size: 1.25rem; margin-bottom: 0.5rem; }
 .vazio p:last-of-type { margin-bottom: 1.25rem; }
 
-/* ---------- Avisos ---------- */
-
-.avisos { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--tinta); }
-.aviso { border-bottom: 1px solid var(--linha); }
-.aviso__link {
-  display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  gap: 1.25rem;
-  padding: 1.25rem 0.5rem 1.25rem 0;
-  color: inherit;
-  text-decoration: none;
-  border-radius: 10px;
-  transition: background-color 160ms ease;
-}
-@media (hover: hover) and (pointer: fine) {
-  .aviso__link:hover { background: var(--papel); }
-  .aviso__link:hover .aviso__titulo { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
-}
-.aviso__link:active { background: var(--papel); }
+/* ---------- Data dos avisos ---------- */
 
 .aviso__data {
   display: flex;
@@ -421,42 +389,10 @@ a, button { touch-action: manipulation; }
 }
 .aviso__dia { font-family: "Marcellus", Georgia, serif; font-size: 1.6rem; font-variant-numeric: tabular-nums; }
 .aviso__mes { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.2rem; }
-
-.aviso__texto { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
-.aviso__categoria {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: var(--vela);
-}
+.aviso__categoria { font-size: 0.875rem; font-weight: 700; color: var(--vela); }
 @media (prefers-color-scheme: light) {
   .aviso__categoria { color: #9a4f08; }
 }
-.aviso__titulo {
-  font-family: "Marcellus", Georgia, serif;
-  font-size: clamp(1.3rem, 1.15rem + 0.5vw, 1.6rem);
-  line-height: 1.2;
-  color: var(--tinta);
-  overflow-wrap: anywhere;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
-}
-.aviso__resumo {
-  color: var(--tinta-suave);
-  font-size: 1rem;
-  max-width: var(--medida);
-  overflow-wrap: anywhere;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  overflow: hidden;
-}
-
-.ano { font-size: 1.5rem; margin: 2.5rem 0 1rem; }
-.ano:first-child { margin-top: 0; }
 
 /* ---------- Contato ---------- */
 
@@ -484,34 +420,6 @@ a, button { touch-action: manipulation; }
   object-position: 50% 40%;
   box-shadow: 0 18px 40px -20px rgba(15, 39, 71, 0.45);
 }
-
-/* ---------- Páginas internas ---------- */
-
-.cabeca-pagina {
-  max-width: var(--largura);
-  margin: 0 auto;
-  padding: clamp(2rem, 6vw, 4rem) var(--borda-lateral) 1rem;
-}
-.cabeca-pagina p { color: var(--tinta-suave); max-width: 50ch; margin-top: 1rem; }
-
-.artigo { max-width: calc(var(--medida) + 2 * 1.25rem); margin: 0 auto; }
-.artigo .cabeca-pagina { padding-left: var(--borda-lateral); padding-right: var(--borda-lateral); }
-.artigo h1 { font-size: clamp(2rem, 1.5rem + 2.4vw, 3.25rem); overflow-wrap: anywhere; }
-.artigo__meta { margin: 1.5rem 0 0.75rem !important; font-size: 1rem; }
-.artigo__detalhes {
-  margin: 0 var(--borda-lateral) 1.5rem;
-  padding: 1rem 1.25rem;
-  background: var(--ceu);
-  border-radius: var(--raio);
-  display: grid;
-  gap: 0.5rem;
-}
-.artigo__detalhes div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 1rem; }
-.artigo__detalhes dt { font-weight: 700; }
-.artigo__detalhes dd { margin: 0; }
-.artigo__corpo { padding: 0.5rem var(--borda-lateral) 0; overflow-wrap: break-word; }
-.artigo__corpo img { max-width: 100%; height: auto; border-radius: var(--raio); }
-.artigo__corpo h2 { font-size: 1.6rem; margin: 2.25rem 0 0.75rem; }
 
 /* ---------- Rodapé ---------- */
 
@@ -560,7 +468,6 @@ a, button { touch-action: manipulation; }
   .topo__barra { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding-bottom: 0.5rem; }
   .menu { margin-left: -0.8rem; }
   .capa__acoes .botao, .contato__acoes .botao { flex: 1 1 auto; }
-  .aviso__link { grid-template-columns: 3.75rem minmax(0, 1fr); gap: 1rem; }
   .aviso__dia { font-size: 1.35rem; }
   .contato__lista div { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
 }
@@ -597,7 +504,6 @@ a, button { touch-action: manipulation; }
 .aviso-completo__corpo { overflow-wrap: break-word; }
 .aviso-completo__corpo > :last-child { margin-bottom: 0; }
 .aviso-completo__corpo img { max-width: 100%; height: auto; border-radius: var(--raio); }
-.mais-avisos { margin-top: 1.25rem; }
 
 @media (max-width: 30rem) {
   .aviso-completo { grid-template-columns: 3.75rem minmax(0, 1fr); gap: 1rem; }

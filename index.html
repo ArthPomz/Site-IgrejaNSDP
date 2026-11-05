@@ -4,6 +4,7 @@ title: Início
 classe_corpo: pagina-inicio
 ---
 {%- assign igreja = site.data.igreja -%}
+{%- assign avisos = site.avisos | sort: "date" | reverse -%}
 <section class="capa" aria-labelledby="capa-titulo">
   <div class="capa__texto">
     <h1 id="capa-titulo">Comunidade Nossa Senhora da Penha</h1>
@@ -20,11 +21,10 @@ classe_corpo: pagina-inicio
 
 <section class="secao" id="avisos" aria-labelledby="avisos-titulo">
   <h2 id="avisos-titulo">Avisos</h2>
-  {% if site.posts.size > 0 %}
+  {% if avisos.size > 0 %}
     <div class="avisos-completos">
-      {% for post in site.posts limit: 5 %}{% include aviso-completo.html post=post %}{% endfor %}
+      {% for post in avisos %}{% include aviso-completo.html post=post %}{% endfor %}
     </div>
-    {% if site.posts.size > 5 %}<p class="mais-avisos"><a class="link-seta" href="{{ '/avisos/' | relative_url }}">Avisos anteriores</a></p>{% endif %}
   {% else %}
     <p class="vazio__titulo">Nenhum aviso publicado ainda.</p>
   {% endif %}
