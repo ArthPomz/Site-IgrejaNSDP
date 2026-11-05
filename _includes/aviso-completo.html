@@ -1,0 +1,19 @@
+{%- assign meses = "jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez" | split: "," -%}
+{%- assign m = include.post.date | date: "%-m" | minus: 1 -%}
+<article class="aviso-completo" id="{{ include.post.slug }}">
+  <time class="aviso__data" datetime="{{ include.post.date | date_to_xmlschema }}">
+    <span class="aviso__dia">{{ include.post.date | date: "%-d" }}</span>
+    <span class="aviso__mes">{{ meses[m] }}</span>
+  </time>
+  <div class="aviso-completo__texto">
+    <p class="aviso__categoria">{{ include.post.categoria | default: "Aviso" }}</p>
+    <h3 class="aviso-completo__titulo">{{ include.post.title }}</h3>
+    {% if include.post.quando or include.post.local %}
+    <dl class="aviso-completo__detalhes">
+      {% if include.post.quando %}<div><dt>Quando</dt><dd>{{ include.post.quando }}</dd></div>{% endif %}
+      {% if include.post.local %}<div><dt>Onde</dt><dd>{{ include.post.local }}</dd></div>{% endif %}
+    </dl>
+    {% endif %}
+    <div class="aviso-completo__corpo">{{ include.post.content }}</div>
+  </div>
+</article>

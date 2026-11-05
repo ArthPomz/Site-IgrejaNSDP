@@ -63,7 +63,7 @@ E abra `http://localhost:4000/Site-IgrejaNSDP/`.
 
 | Caminho | O que é |
 | --- | --- |
-| `index.html` | Página inicial: capa, missas, avisos recentes e contato |
+| `index.html` | Página inicial: capa, avisos (com o texto completo), missas e contato |
 | `avisos/index.html` | Lista de todos os avisos |
 | `_posts/` | Os avisos, um arquivo por aviso |
 | `_data/igreja.yml` | Endereço, contatos e horários de missa |

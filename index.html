@@ -10,12 +10,24 @@ classe_corpo: pagina-inicio
     <p class="capa__lead">A capela azul de Timbuí, em Fundão. Aqui você encontra os horários das missas, os avisos da semana e como chegar até a igreja.</p>
     <div class="capa__acoes">
       <a class="botao botao--cheio" href="#missas">Horários de missa</a>
-      <a class="botao" href="{{ '/avisos/' | relative_url }}">Ver avisos</a>
+      <a class="botao" href="#avisos">Ver avisos</a>
     </div>
   </div>
   <div class="capa__desenho">
     {% include fachada.svg %}
   </div>
+</section>
+
+<section class="secao" id="avisos" aria-labelledby="avisos-titulo">
+  <h2 id="avisos-titulo">Avisos</h2>
+  {% if site.posts.size > 0 %}
+    <div class="avisos-completos">
+      {% for post in site.posts limit: 5 %}{% include aviso-completo.html post=post %}{% endfor %}
+    </div>
+    {% if site.posts.size > 5 %}<p class="mais-avisos"><a class="link-seta" href="{{ '/avisos/' | relative_url }}">Avisos anteriores</a></p>{% endif %}
+  {% else %}
+    <p class="vazio__titulo">Nenhum aviso publicado ainda.</p>
+  {% endif %}
 </section>
 
 <section class="secao" id="missas" aria-labelledby="missas-titulo">
@@ -40,19 +52,7 @@ classe_corpo: pagina-inicio
   {% endif %}
 </section>
 
-<section class="secao" id="avisos" aria-labelledby="avisos-titulo">
-  <div class="secao__cabeca">
-    <h2 id="avisos-titulo">Avisos recentes</h2>
-    {% if site.posts.size > 3 %}<a class="link-seta" href="{{ '/avisos/' | relative_url }}">Todos os avisos</a>{% endif %}
-  </div>
-  {% if site.posts.size > 0 %}
-    <ul class="avisos">
-      {% for post in site.posts limit: 3 %}{% include aviso-item.html post=post %}{% endfor %}
-    </ul>
-  {% else %}
-    <p class="vazio__titulo">Nenhum aviso publicado ainda.</p>
-  {% endif %}
-</section>
+
 
 <section class="secao contato" id="contato" aria-labelledby="contato-titulo">
   <div class="contato__texto">

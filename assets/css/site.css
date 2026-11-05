@@ -106,7 +106,7 @@ h1, h2, h3 {
   text-wrap: balance;
   margin: 0;
 }
-h1 { font-size: clamp(2.25rem, 1.4rem + 3.6vw, 4.25rem); }
+h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.4rem); }
 h2 { font-size: clamp(1.75rem, 1.35rem + 1.6vw, 2.5rem); }
 
 p { margin: 0 0 1em; text-wrap: pretty; }
@@ -216,7 +216,7 @@ a, button { touch-action: manipulation; }
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   align-items: end;
   gap: 2rem;
-  padding: clamp(1.5rem, 4vw, 3.5rem) var(--borda-lateral) 0;
+  padding: clamp(1rem, 3vw, 2.5rem) var(--borda-lateral) 0;
   background: var(--ceu);
   overflow: hidden;
 }
@@ -230,7 +230,7 @@ a, button { touch-action: manipulation; }
   mask: url("../img/azulejo.svg") 0 0 / 64px 64px repeat;
 }
 .capa > * { max-width: calc(var(--largura) / 2); }
-.capa__texto { justify-self: end; width: 100%; padding-bottom: clamp(2.5rem, 6vw, 5rem); }
+.capa__texto { justify-self: end; width: 100%; padding-bottom: clamp(2rem, 4vw, 3.25rem); }
 .capa__desenho { justify-self: start; width: 100%; }
 
 .capa h1 { max-width: 12ch; color: var(--tinta); }
@@ -250,7 +250,7 @@ a, button { touch-action: manipulation; }
 .fachada {
   display: block;
   width: 100%;
-  max-width: 400px;
+  max-width: 320px;
   height: auto;
   margin: 0 auto -6px;
   overflow: visible;
@@ -549,7 +549,9 @@ a, button { touch-action: manipulation; }
     padding-top: 0.5rem;
   }
   .capa__texto { justify-self: stretch; padding-bottom: 1.5rem; }
-  .capa__desenho { justify-self: center; max-width: 300px; }
+  .capa__desenho { justify-self: center; max-width: 170px; }
+  .capa__lead { margin-top: 0.75rem; }
+  .capa__acoes { margin-top: 1.25rem; }
   .contato { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -562,3 +564,45 @@ a, button { touch-action: manipulation; }
   .aviso__dia { font-size: 1.35rem; }
   .contato__lista div { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
 }
+
+/* ---------- Avisos completos na página inicial ---------- */
+
+.avisos-completos { display: grid; border-top: 2px solid var(--tinta); }
+.aviso-completo {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--linha);
+  scroll-margin-top: 1rem;
+}
+.aviso-completo__texto { min-width: 0; max-width: var(--medida); }
+.aviso-completo .aviso__categoria { margin: 0 0 0.25rem; }
+.aviso-completo__titulo {
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.85rem);
+  overflow-wrap: anywhere;
+  margin-bottom: 0.75rem;
+}
+.aviso-completo__detalhes {
+  margin: 0 0 1rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--ceu);
+  border-radius: var(--raio);
+  display: grid;
+  gap: 0.4rem;
+}
+.aviso-completo__detalhes div { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: 1rem; }
+.aviso-completo__detalhes dt { font-weight: 700; }
+.aviso-completo__detalhes dd { margin: 0; }
+.aviso-completo__corpo { overflow-wrap: break-word; }
+.aviso-completo__corpo > :last-child { margin-bottom: 0; }
+.aviso-completo__corpo img { max-width: 100%; height: auto; border-radius: var(--raio); }
+.mais-avisos { margin-top: 1.25rem; }
+
+@media (max-width: 30rem) {
+  .aviso-completo { grid-template-columns: 3.75rem minmax(0, 1fr); gap: 1rem; }
+  .aviso-completo__detalhes div { grid-template-columns: minmax(0, 1fr); gap: 0.1rem; }
+}
+
+/* Os avisos vêm logo depois da capa, com menos espaço acima */
+#avisos { padding-top: clamp(2rem, 4vw, 3rem); }

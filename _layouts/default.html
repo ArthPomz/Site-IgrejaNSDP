@@ -24,7 +24,7 @@
       <nav class="menu" aria-label="Principal">
         {% assign url = page.url %}
         <a href="{{ '/' | relative_url }}" {% if url == '/' %}aria-current="page"{% endif %}>Início</a>
-        <a href="{{ '/avisos/' | relative_url }}" {% if url contains '/avisos/' %}aria-current="page"{% endif %}>Avisos</a>
+        <a href="{{ '/#avisos' | relative_url }}">Avisos</a>
         <a href="{{ '/#contato' | relative_url }}">Contato</a>
       </nav>
     </div>
